@@ -72,40 +72,8 @@
       ]
     },
     {
-      "user_id": "c225fbca-746a-4d0a-bbbe-90af96cb11b0",
-      "groups": [
-        {
-          "group_id": "bddc7987-62af-43b7-b8e1-d623b5923fab",
-          "group_icon": "default_icon",
-          "group_title": "Untitled",
-          "items": []
-        },
-        {
-          "group_id": "5ca03211-ce00-415a-ad77-916559014e61",
-          "group_icon": "default_icon",
-          "group_title": "Untitled",
-          "items": [
-            {
-              "item_id": "1b0a0108-f6e1-482d-bd21-4d3348b48070",
-              "item_type": 0,
-              "browserTab_favIconURL": "https://example.com/favicon.png",
-              "browserTab_title": "Example Tab Title",
-              "browserTab_url": "https://example.com",
-              "browserTab_id": 133,
-              "browserTab_index": 15,
-              "browserTab_active": false,
-              "browserTab_status": "complete",
-              "windowId": 3850513484
-            }
-          ]
-        },
-        {
-          "group_id": "70dc14cf-d57a-4c81-ac44-8f13ea6bb3ed",
-          "group_icon": "default_icon",
-          "group_title": "Untitled",
-          "items": []
-        }
-      ]
+      "user_id": "86ee0c3c-582a-4b80-9e24-5c6bf6b38958",
+      "groups": []
     }
   ],
   "users": [
@@ -113,6 +81,11 @@
       "user_id": "1",
       "email": "test123@gmail.com",
       "password": "bdc0b31f0c6ac3a45fb42b338e5d1c73ef1522f2e07589f2de30371f309de2d9"
+    },
+    {
+      "user_id": "86ee0c3c-582a-4b80-9e24-5c6bf6b38958",
+      "email": "user2@example.com",
+      "password": "$2b$10$X1uHbjNQNgQuimM5NzJk8.uJ2.p3AwmJPDPENRQ9AFt/3yOaoIqnS"
     }
   ]
 }

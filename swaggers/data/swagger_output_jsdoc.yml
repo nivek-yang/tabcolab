@@ -513,6 +513,8 @@ paths:
     get:
       tags:
         - Users(Testing)
+      security:
+        - bearerAuth: []
       description: Returns all users data (For Testing)
       responses:
         "200":
