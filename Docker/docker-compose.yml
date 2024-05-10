@@ -8,18 +8,20 @@ services:
       - API_VERSION=1.0
       - USE_CLOUD_DB=true
       - PORT=5000
-    build:
-      context: ../
-      dockerfile: Docker/server/Dockerfile
+    # build:
+    #   context: ../
+    #   dockerfile: Docker/server/Dockerfile
+    image: nivekyang/tabcolab-server:1.0.0
     volumes:
       - ../.env:/app/.env
     ports:
       - "5000:5000"
       
   nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./nginx
+    #   dockerfile: Dockerfile
+    image: nivekyang/tabcolab-nginx:1.0.0
     ports:
       - "80:80"
     depends_on:
