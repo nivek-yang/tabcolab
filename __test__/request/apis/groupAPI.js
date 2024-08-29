@@ -1,6 +1,9 @@
 const request = require('supertest');
 const server = require('../../../server');
 
+// OPTION: We can build a GroupAPI class and use a constructor with authToken.
+// This would allow us to use this.authToken in our methods instead of passing it as a parameter.
+
 async function getGroup(authToken) {
   const requestObject = request(server)
     .get('/api/1.0/groups');

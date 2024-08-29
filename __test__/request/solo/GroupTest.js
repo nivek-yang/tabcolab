@@ -4,7 +4,10 @@ const { groupsChanges } = require('../../utils/groupsChanges');
 const GroupValidator = require('../../validations/group');
 const ItemValidator = require('../../validations/item');
 const { UserGroupTest } = require('../../classes/UserTest');
-const { registerUser } = require('../apis/usersAPI');
+const {
+  getGroup, postGroup, patchGroup, deleteGroup,
+} = require('../apis/groupAPI');
+const { registerUser, loginUser } = require('../apis/userAPI');
 const { validateApiResponse } = require('../../utils/apiTestHelper');
 const { BadRequestBodyTest } = require('../../classes/BadRequestBodyTest');
 
@@ -13,17 +16,9 @@ const GroupTest = async (server) => {
   let userData = { email: 'user@example.com', password: 'mySecurePassword123' };
 
   beforeAll(async () => {
-    userData = { email: 'user@example.com', password: 'mySecurePassword123' };
-    const res = await request(server)
-      .post('/api/1.0/users/login')
-      .set('Content-Type', 'application/json')
-      .send(userData);
+    const res = await loginUser(userData);
     authToken = res.body.token;
   });
-
-  const {
-    getGroup, postGroup, patchGroup, deleteGroup,
-  } = require('../apis/groupsAPI');
 
   describe('Get /groups', () => {
     it('200: success', async () => {
@@ -44,10 +39,10 @@ const GroupTest = async (server) => {
         handleException(res, e);
       }
     });
-    it('404: no cotent', async () => {
+    it('404: No groups found for the new registered user', async () => {
       const groupTest = new UserGroupTest(registerUser, getGroup);
-      const userData = { email: 'newuser@example.com', password: 'mySecurePassword123' };
-      await groupTest.registerAndTestGroup(userData);
+      userData = { email: 'newuser@example.com', password: 'mySecurePassword123' };
+      await groupTest.registerAndTestGroupNotFound(userData);
     });
     describe('401: JWT problem', () => {
       it('Missing JWT', async () => {
@@ -73,7 +68,7 @@ const GroupTest = async (server) => {
     let newGroupData = {
       group_icon: 'icon-url',
       group_title: 'New Group',
-    }; //
+    };
     beforeEach(() => {
       newGroupData = {
         group_icon: 'icon-url',
@@ -101,7 +96,7 @@ const GroupTest = async (server) => {
       });
     });
     describe('createGroup(SidebarTab)', () => {
-      let newSidebarTabData = {
+      const newSidebarTabData = {
         group_icon: 'test_group_icon',
         group_title: 'test_group_title',
         browserTab_favIconURL: 'test_favIconURL',
@@ -113,20 +108,6 @@ const GroupTest = async (server) => {
         browserTab_status: 'complete',
         windowId: 8438513405,
       };
-      beforeEach(() => {
-        newSidebarTabData = {
-          group_icon: 'test_group_icon',
-          group_title: 'test_group_title',
-          browserTab_favIconURL: 'test_favIconURL',
-          browserTab_title: 'SidebarTab_title',
-          browserTab_url: 'test_url',
-          browserTab_id: 456,
-          browserTab_index: 7,
-          browserTab_active: false,
-          browserTab_status: 'complete',
-          windowId: 8438513405,
-        };
-      });
       it('201: create SidebarTab within a new group', async () => {
         let res;
         try {
@@ -172,13 +153,13 @@ const GroupTest = async (server) => {
           await groupTest.jsonFormatError(invalidJson);
         });
         it('No field', async () => {
-          await groupTest.noField({}, authToken, 'Invalid request body');
+          await groupTest.noFieldError({}, authToken, 'Invalid request body');
         });
         it('Undefined Field', async () => {
-          await groupTest.undefinedField(authToken, 'Invalid request body');
+          await groupTest.undefinedFieldError(authToken, 'Invalid request body');
         });
         // describe('Missing field', () => {
-        //   groupTest.missingField(authToken);
+        //   groupTest.missingFieldError(authToken);
         // });
       });
 
@@ -230,13 +211,13 @@ const GroupTest = async (server) => {
           await groupTest.jsonFormatError(invalidJson);
         });
         it('No field', async () => {
-          await groupTest.noField({}, authToken, 'Invalid request body');
+          await groupTest.noFieldError({}, authToken, 'Invalid request body');
         });
         it('Undefined Field', async () => {
-          await groupTest.undefinedField(authToken, 'Invalid request body');
+          await groupTest.undefinedFieldError(authToken, 'Invalid request body');
         });
         // describe('Missing field', () => {
-        //   groupTest.missingField(authToken);
+        //   groupTest.missingFieldError(authToken);
         // });
       });
 
@@ -310,13 +291,13 @@ const GroupTest = async (server) => {
           await groupTest.jsonFormatError(invalidJson, [groupId]);
         });
         it('No field', async () => {
-          await groupTest.noField({}, authToken, 'Invalid request body', [groupId]);
+          await groupTest.noFieldError({}, authToken, 'Invalid request body', [groupId]);
         });
         it('Undefined Field', async () => {
-          await groupTest.undefinedField(authToken, 'not allowed', [groupId]);
+          await groupTest.undefinedFieldError(authToken, 'not allowed', [groupId]);
         });
         // describe('Missing field', () => {
-        //   groupTest.missingField(authToken);
+        //   groupTest.missingFieldError(authToken);
         // });
       });
       describe('400 Bad request: Field Data Format Error', () => {
@@ -350,13 +331,13 @@ const GroupTest = async (server) => {
           await groupTest.jsonFormatError(invalidJson, [groupId]);
         });
         it('No field', async () => {
-          await groupTest.noField({}, authToken, 'Invalid request body', [groupId]);
+          await groupTest.noFieldError({}, authToken, 'Invalid request body', [groupId]);
         });
         it('Undefined Field', async () => {
-          await groupTest.undefinedField(authToken, 'not allowed', [groupId]);
+          await groupTest.undefinedFieldError(authToken, 'not allowed', [groupId]);
         });
         // describe('Missing field', () => {
-        //   groupTest.missingField(authToken);
+        //   groupTest.missingFieldError(authToken);
         // });
       });
     });

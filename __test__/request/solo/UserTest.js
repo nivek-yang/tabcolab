@@ -1,7 +1,6 @@
 const { handleException } = require('../../utils/testErrorHandler');
 const { validateApiResponse, testTokenValidity, registerUserWithUniqueEmail } = require('../../utils/apiTestHelper');
 const { BadRequestBodyTest } = require('../../classes/BadRequestBodyTest');
-const { getNewToken } = require('../../utils/getNewToken');
 
 let userData = { email: 'login@gmail.com', password: 'password1' };
 
@@ -14,7 +13,7 @@ const UserTest = async (server) => {
 
   const {
     registerUser, loginUser, getUser, getAllUsers, patchUser, deleteUser,
-  } = require('../apis/usersAPI');
+  } = require('../apis/userAPI');
 
   describe('Post /users/register', () => {
     const userTest = new BadRequestBodyTest(registerUser, userData, userData);
@@ -36,13 +35,13 @@ const UserTest = async (server) => {
         await userTest.jsonFormatError(invalidJson);
       });
       it('No field', async () => {
-        await userTest.noField();
+        await userTest.noFieldError();
       });
       it('Undefined Field', async () => {
-        await userTest.undefinedField();
+        await userTest.undefinedFieldError();
       });
       describe('Missing field', () => {
-        userTest.missingField();
+        userTest.missingFieldError();
       });
     });
     describe('400 Bad request: Field Data Format Error', () => {
@@ -84,13 +83,13 @@ const UserTest = async (server) => {
         await userTest.jsonFormatError(invalidJson);
       });
       it('No field', async () => {
-        await userTest.noField();
+        await userTest.noFieldError();
       });
       describe('Missing field', () => {
-        userTest.missingField();
+        userTest.missingFieldError();
       });
       it('Undefined Field', async () => {
-        await userTest.undefinedField();
+        await userTest.undefinedFieldError();
       });
     });
     describe('400 Bad request: Field Data Format Error', () => {
@@ -225,10 +224,10 @@ const UserTest = async (server) => {
         await userTest.jsonFormatError(invalidJson);
       });
       it('No field', async () => {
-        await userTest.noField({}, authToken, 'must contain');
+        await userTest.noFieldError({}, authToken, 'must contain');
       });
       it('Undefined Field', async () => {
-        await userTest.undefinedField(authToken);
+        await userTest.undefinedFieldError(authToken);
       });
     });
     describe('400 Bad request: Field Data Format Error', () => {

@@ -80,13 +80,13 @@ const SpecItemTest = async (server) => {
           await specItemTest.jsonFormatError(invalidJson, [req.params.group_id]);
         });
         it('No field', async () => {
-          await specItemTest.noField({}, authToken, 'is required', [req.params.group_id]);
+          await specItemTest.noFieldError({}, authToken, 'is required', [req.params.group_id]);
         });
         it('Undefined Field', async () => {
-          await specItemTest.undefinedField(authToken, 'not allowed', [req.params.group_id]);
+          await specItemTest.undefinedFieldError(authToken, 'not allowed', [req.params.group_id]);
         });
         describe('Missing field', () => {
-          specItemTest.missingField(authToken, [req.params.group_id]);
+          specItemTest.missingFieldError(authToken, [req.params.group_id]);
         });
       });
       describe('400 Bad request: Field Data Format Error', () => {
@@ -201,13 +201,13 @@ const SpecItemTest = async (server) => {
             await specItemTest.jsonFormatError(invalidJson, [req.params.group_id]);
           });
           it('No field', async () => {
-            await specItemTest.noField({}, authToken, 'is required', [req.params.group_id]);
+            await specItemTest.noFieldError({}, authToken, 'is required', [req.params.group_id]);
           });
           it('Undefined Field', async () => {
-            await specItemTest.undefinedField(authToken, 'not allowed', [req.params.group_id]);
+            await specItemTest.undefinedFieldError(authToken, 'not allowed', [req.params.group_id]);
           });
           describe('Missing field', () => {
-            specItemTest.missingField(authToken, [req.params.group_id]);
+            specItemTest.missingFieldError(authToken, [req.params.group_id]);
           });
         });
         describe('400 Bad request: Field Data Format Error', () => {
@@ -317,13 +317,13 @@ const SpecItemTest = async (server) => {
             await specItemTest.jsonFormatError(invalidJson, [req.params.group_id, req.params.item_id]);
           });
           it('No field', async () => {
-            await specItemTest.noField({}, authToken, 'is required', [req.params.group_id, req.params.item_id]);
+            await specItemTest.noFieldError({}, authToken, 'is required', [req.params.group_id, req.params.item_id]);
           });
           it('Undefined Field', async () => {
-            await specItemTest.undefinedField(authToken, 'Unexpected Additional Parameters', [req.params.group_id, req.params.item_id]);
+            await specItemTest.undefinedFieldError(authToken, 'Unexpected Additional Parameters', [req.params.group_id, req.params.item_id]);
           });
           // describe('Missing field', () => {
-          //   specItemTest.missingField(authToken, [req.params.group_id, req.params.item_id]);
+          //   specItemTest.missingFieldError(authToken, [req.params.group_id, req.params.item_id]);
           // });
         });
       });
@@ -460,13 +460,13 @@ const SpecItemTest = async (server) => {
             await specItemTest.jsonFormatError(invalidJson, [req.params.group_id, req.params.item_id]);
           });
           it('No field', async () => {
-            await specItemTest.noField({}, authToken, '"item_type" or "doneStatus" or "note_content" is required', [req.params.group_id, req.params.item_id]);
+            await specItemTest.noFieldError({}, authToken, '"item_type" or "doneStatus" or "note_content" is required', [req.params.group_id, req.params.item_id]);
           });
           it('Undefined Field', async () => {
-            await specItemTest.undefinedField(authToken, 'Unexpected Additional Parameters', [req.params.group_id, req.params.item_id]);
+            await specItemTest.undefinedFieldError(authToken, 'Unexpected Additional Parameters', [req.params.group_id, req.params.item_id]);
           });
           // describe('Missing field', () => {
-          //   specItemTest.missingField(authToken, [req.params.group_id, req.params.item_id]);
+          //   specItemTest.missingFieldError(authToken, [req.params.group_id, req.params.item_id]);
           // });
         });
 

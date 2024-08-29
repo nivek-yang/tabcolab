@@ -6,7 +6,7 @@ class UserGroupTest {
     this.getGroup = getGroup;
   }
 
-  async registerAndTestGroup(userData) {
+  async registerAndTestGroupNotFound(userData) {
     let res;
     try {
       const registerResponse = await this.registerUser(userData);

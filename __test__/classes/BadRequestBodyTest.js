@@ -3,8 +3,8 @@ const { validateApiResponse } = require('../utils/apiTestHelper');
 const { getNewToken } = require('../utils/getNewToken');
 
 class BadRequestBodyTest {
-  constructor(userAction, userData, requestData = null) {
-    this.userAction = userAction;
+  constructor(apiAction, userData, requestData = null) {
+    this.apiAction = apiAction;
     this.userData = userData;
     this.requestData = requestData;
   }
@@ -13,23 +13,23 @@ class BadRequestBodyTest {
     let res;
     try {
       const params = [...additionalParams, invalidJson];
-      res = await validateApiResponse(this.userAction, params, 400, 'fail', 'Invalid JSON format in request body');
+      res = await validateApiResponse(this.apiAction, params, 400, 'fail', 'Invalid JSON format in request body');
     } catch (e) {
       handleException(res, e);
     }
   }
 
-  async noField(newUserData = {}, authToken = null, expectedMessage = 'is required', additionalParams = []) {
+  async noFieldError(emptyRequestData = {}, authToken = null, expectedMessage = 'is required', additionalParams = []) {
     let res;
     try {
-      const params = [...additionalParams, newUserData, authToken];
-      res = await validateApiResponse(this.userAction, params, 400, 'fail', expectedMessage, 'toMatch');
+      const params = [...additionalParams, emptyRequestData, authToken];
+      res = await validateApiResponse(this.apiAction, params, 400, 'fail', expectedMessage, 'toMatch');
     } catch (e) {
       handleException(res, e);
     }
   }
 
-  async missingField(authToken = null, additionalParams = []) {
+  async missingFieldError(authToken = null, additionalParams = []) {
     const testData = Object.keys(this.requestData);
     for (const field of testData) {
       it(`Missing ${field} field`, async () => {
@@ -39,7 +39,7 @@ class BadRequestBodyTest {
         try {
           const { [field]: removedField, ...newRequestData } = this.requestData;
           const params = [...additionalParams, newRequestData, Token];
-          res = await validateApiResponse(this.userAction, params, 400, 'fail', `"${field}" is required`);
+          res = await validateApiResponse(this.apiAction, params, 400, 'fail', `"${field}" is required`);
         } catch (e) {
           handleException(res, e);
         }
@@ -47,12 +47,12 @@ class BadRequestBodyTest {
     }
   }
 
-  async undefinedField(authToken = null, expectedMessage = 'not allowed', additionalParams = []) {
+  async undefinedFieldError(authToken = null, expectedMessage = 'not allowed', additionalParams = []) {
     this.requestData.undefinedField = 'undefined';
     let res;
     try {
       const params = [...additionalParams, this.requestData, authToken];
-      res = await validateApiResponse(this.userAction, params, 400, 'fail', expectedMessage, 'toMatch');
+      res = await validateApiResponse(this.apiAction, params, 400, 'fail', expectedMessage, 'toMatch');
     } catch (e) {
       handleException(res, e);
     } finally {
@@ -95,14 +95,13 @@ class BadRequestBodyTest {
         it(`${field} field required ${fieldTypeRequired} (but value type: ${type})`, async () => {
           const token = await getNewToken(this.userData);
           const Token = authToken || token;
-          // 复制一份用户数据以避免污染其他测试
           const testData = { ...this.requestData };
           testData[field] = value;
           let res;
           try {
             const params = [...additionalParams, testData, Token];
             const errorMessage = expectedMessage || `"${field}" must be a ${fieldTypeRequired}`;
-            res = await validateApiResponse(this.userAction, params, 400, 'fail', errorMessage);
+            res = await validateApiResponse(this.apiAction, params, 400, 'fail', errorMessage);
           } catch (e) {
             handleException(res, e);
           }

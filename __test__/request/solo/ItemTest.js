@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { handleException } = require('../../utils/testErrorHandler');
-const { getGroup } = require('../apis/groupsAPI');
+const { getGroup } = require('../apis/groupAPI');
 const { ArraysChanges } = require('../../utils/groupsChanges');
 const { validateApiResponse } = require('../../utils/apiTestHelper');
 const { BadRequestBodyTest } = require('../../classes/BadRequestBodyTest');
@@ -24,7 +24,7 @@ const ItemTest = async (server) => {
 
   const {
     getSearchItems, patchItem, deleteItem,
-  } = require('../apis/itemsAPI');
+  } = require('../apis/itemAPI');
 
   describe('Get /items/search', () => {
     beforeEach(() => {
@@ -413,13 +413,13 @@ const ItemTest = async (server) => {
         await itemTest.jsonFormatError(invalidJson, [req.params.group_id, req.params.item_id]);
       });
       it('No field', async () => {
-        await itemTest.noField({}, authToken, 'Invalid request body', [req.params.group_id, req.params.item_id]);
+        await itemTest.noFieldError({}, authToken, 'Invalid request body', [req.params.group_id, req.params.item_id]);
       });
       it('Undefined Field', async () => {
-        await itemTest.undefinedField(authToken, 'not allowed', [req.params.group_id, req.params.item_id]);
+        await itemTest.undefinedFieldError(authToken, 'not allowed', [req.params.group_id, req.params.item_id]);
       });
       // describe('Missing field', () => {
-      //   itemTest.missingField(authToken);
+      //   itemTest.missingFieldError(authToken);
       // });
     });
     describe('400 Bad request: Field Data Format Error', () => {

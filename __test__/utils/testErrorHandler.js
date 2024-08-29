@@ -1,4 +1,4 @@
-function handleException(response, e) {
+function handleAndRethrowException(response, e) {
   let customErrorMessage;
   if (response && response.body && Object.keys(response.body).length > 0) {
     customErrorMessage = `Actual Response Body:\n ${JSON.stringify(response.body, null, 2)}\n \n ${e.message}`;
@@ -8,4 +8,4 @@ function handleException(response, e) {
   throw new Error(customErrorMessage); // 重新抛出异常
 }
 
-module.exports = { handleException };
+module.exports = { handleException: handleAndRethrowException };
