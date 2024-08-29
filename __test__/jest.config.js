@@ -1,5 +1,5 @@
 module.exports = {
   silent: true,
-  coverageDirectory: './coverage/',
+  coverageDirectory: '__test__/coverage/',
   collectCoverage: true,
 };

@@ -6,10 +6,7 @@
   "scripts": {
     "server": "nodemon server.js",
     "docker-compose": "cd Docker && docker-compose up --build -d",
-    "test": "DEBUG=* cross-env NODE_ENV=production jest --verbose > test.log",
-    "test2": "cross-env NODE_ENV=production jest --verbose",
-    "mongodb-dump": "mongodump --uri='mongodb://localhost:27017/TabcolabDB' --out=./",
-    "mongodb-store": "mongorestore --uri='mongodb://localhost:27017/TabcolabDBTest' ./TabcolabDB"
+    "test-api": "cross-env NODE_ENV=production jest --verbose --config __test__/jest.config.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

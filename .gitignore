@@ -1,13 +1,17 @@
-.DS_store
+**/node_modules/
 
-node_modules
-
-package-lock.json
-
-.env
-
-swaggerSplit.yml
+**/package-lock.json
 
 **/mongodb_data/
 
-coverage
+**/coverage/
+
+**/test.log
+
+.vscode/
+
+.eslintrc.json
+
+.env
+
+.DS_store
