@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const errorResponse = require('../utils/errorResponse');
+import User from '../models/user.js';
+import errorResponse from '../utils/errorResponse.js';
 
 const register = async (req, res, next) => {
   try {
@@ -124,6 +124,11 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  register, login, getAllUsers, getUserInfo, updateUserInfo, deleteUser,
+export {
+  register,
+  login,
+  getAllUsers,
+  getUserInfo,
+  updateUserInfo,
+  deleteUser,
 };

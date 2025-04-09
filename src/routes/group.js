@@ -1,13 +1,15 @@
-const router = require('express').Router();
-const controller = require('../controllers/group');
-const { validateGroupDataTypes } = require('../validations/group');
-const { validateItemDataTypes } = require('../validations/item');
-const { validatePositionDataTypes } = require('../validations/position');
-const validateDataTypes = require('../validations/data');
+import { Router } from 'express';
+import { getGroups, createGroup, updateGroup, deleteGroup } from '../controllers/group.js';
+import { validateGroupDataTypes } from '../validations/group.js';
+import { validateItemDataTypes } from '../validations/item.js';
+import { validatePositionDataTypes } from '../validations/position.js';
+import validateDataTypes from '../validations/data.js';
 
-router.get('/', controller.getGroups);
-router.post('/', validateDataTypes, controller.createGroup);
-router.patch('/:group_id', validateDataTypes, controller.updateGroup);
-router.delete('/:group_id', controller.deleteGroup);
+const router = Router();
 
-module.exports = router;
+router.get('/', getGroups);
+router.post('/', validateDataTypes, createGroup);
+router.patch('/:group_id', validateDataTypes, updateGroup);
+router.delete('/:group_id', deleteGroup);
+
+export default router;

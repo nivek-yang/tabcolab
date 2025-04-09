@@ -7,4 +7,4 @@ const pageNotFoundHandler = (req, res, next) => {
   });
 };
 
-module.exports = pageNotFoundHandler;
+export default pageNotFoundHandler;

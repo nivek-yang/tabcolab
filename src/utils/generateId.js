@@ -1,15 +1,13 @@
-const { v4: uuidv4 } = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
-function generateGroupId() {
+export function generateGroupId() {
   return uuidv4();
 }
 
-function generateItemId() {
+export function generateItemId() {
   return uuidv4();
 }
 
-function generateUserId() {
+export function generateUserId() {
   return uuidv4();
 }
-
-module.exports = { generateGroupId, generateItemId, generateUserId };

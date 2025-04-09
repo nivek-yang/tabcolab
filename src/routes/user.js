@@ -1,18 +1,20 @@
-const router = require('express').Router();
-const { validateRegisterandLoginDataTypes, validateUserInfoUpdateDataTypes } = require('../validations/user');
-const controller = require('../controllers/user');
-const { authenticateJwt, authenticateAdmin } = require('../middlewares/authenticate');
+import { Router } from 'express';
+import { validateRegisterandLoginDataTypes, validateUserInfoUpdateDataTypes } from '../validations/user.js';
+import { register, login, getAllUsers, getUserInfo, updateUserInfo, deleteUser } from '../controllers/user.js';
+import { authenticateJwt, authenticateAdmin } from '../middlewares/authenticate.js';
+
+const router = Router();
 
 // local auth
-router.post('/users/register', validateRegisterandLoginDataTypes, controller.register);
-router.post('/users/login', validateRegisterandLoginDataTypes, controller.login);
+router.post('/users/register', validateRegisterandLoginDataTypes, register);
+router.post('/users/login', validateRegisterandLoginDataTypes, login);
 
 // JWT authentication middleware
 router.use(authenticateJwt);
 
-router.get('/users', authenticateAdmin, controller.getAllUsers);
-router.get('/user', controller.getUserInfo);
-router.patch('/user', validateUserInfoUpdateDataTypes, controller.updateUserInfo);
-router.delete('/user', controller.deleteUser);
+router.get('/users', authenticateAdmin, getAllUsers);
+router.get('/user', getUserInfo);
+router.patch('/user', validateUserInfoUpdateDataTypes, updateUserInfo);
+router.delete('/user', deleteUser);
 
-module.exports = router;
+export default router;

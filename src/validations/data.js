@@ -1,8 +1,8 @@
-const Joi = require('joi');
-const { groupSchema } = require('./group');
-const { itemSchema } = require('./item');
-const { positionSchema } = require('./position');
-const AppError = require('../utils/appError');
+import Joi from 'joi';
+import { groupSchema } from './group.js';
+import { itemSchema } from './item.js';
+import { positionSchema } from './position.js';
+import AppError from '../utils/appError.js';
 
 const validateDataTypes = (req, res, next) => {
   const schemas = [groupSchema, itemSchema, positionSchema];
@@ -17,4 +17,4 @@ const validateDataTypes = (req, res, next) => {
   next();
 };
 
-module.exports = validateDataTypes;
+export default validateDataTypes;

@@ -1,5 +1,5 @@
-const Joi = require('joi');
-const AppError = require('../utils/appError');
+import Joi from 'joi';
+import AppError from '../utils/appError.js';
 
 const positionSchema = Joi.object({
   group_pos: Joi.number().integer().optional(),
@@ -16,4 +16,4 @@ const validatePositionDataTypes = (req, res, next) => {
   next();
 };
 
-module.exports = { positionSchema, validatePositionDataTypes };
+export { positionSchema, validatePositionDataTypes };

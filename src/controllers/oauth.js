@@ -1,9 +1,8 @@
-require('dotenv').config();
-const { OAuth2Client } = require('google-auth-library');
-const { google } = require('googleapis');
-
-const User = require('../models/user');
-const errorResponse = require('../utils/errorResponse');
+import 'dotenv/config';
+import { OAuth2Client } from 'google-auth-library';
+import { google } from 'googleapis';
+import User from '../models/user.js';
+import errorResponse from '../utils/errorResponse.js';
 
 const googleOauth = async (req, res, next) => {
   try {
@@ -74,6 +73,4 @@ const googleOauth = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  googleOauth,
-};
+export { googleOauth };

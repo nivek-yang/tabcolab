@@ -1,5 +1,5 @@
-const Joi = require('joi');
-const AppError = require('../utils/appError');
+import Joi from 'joi';
+import AppError from '../utils/appError.js';
 
 const groupSchema = Joi.object({
   group_id: Joi.string().optional(),
@@ -20,4 +20,4 @@ const validateGroupDataTypes = (req, res, next) => {
   next();
 };
 
-module.exports = { groupSchema, validateGroupDataTypes };
+export { groupSchema, validateGroupDataTypes };

@@ -1,12 +1,13 @@
-const router = require('express').Router();
+import { Router } from 'express';
+import { validateItemDataTypes } from '../validations/item.js';
+import { addTab, updateTab, addNote, updateNote, updateTodo } from '../controllers/specItem.js';
 
-const { validateItemDataTypes } = require('../validations/item');
-const controller = require('../controllers/specItem');
+const router = Router();
 
-router.post('/:group_id/tabs', validateItemDataTypes, controller.addTab);
-router.patch('/:group_id/tabs/:item_id', validateItemDataTypes, controller.updateTab);
-router.post('/:group_id/notes', validateItemDataTypes, controller.addNote);
-router.patch('/:group_id/notes/:item_id', validateItemDataTypes, controller.updateNote);
-router.patch('/:group_id/todos/:item_id', validateItemDataTypes, controller.updateTodo);
+router.post('/:group_id/tabs', validateItemDataTypes, addTab);
+router.patch('/:group_id/tabs/:item_id', validateItemDataTypes, updateTab);
+router.post('/:group_id/notes', validateItemDataTypes, addNote);
+router.patch('/:group_id/notes/:item_id', validateItemDataTypes, updateNote);
+router.patch('/:group_id/todos/:item_id', validateItemDataTypes, updateTodo);
 
-module.exports = router;
+export default router;

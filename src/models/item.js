@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
-const { UserGroup } = require('./group');
-const { generateItemId } = require('../utils/generateId');
-const AppError = require('../utils/appError');
+import mongoose from 'mongoose';
+import { UserGroup } from './group.js';
+import { generateItemId } from '../utils/generateId.js';
+import AppError from '../utils/appError.js';
 
-const ItemSchema = new mongoose.Schema({
+// 定義並導出 Schema
+export const ItemSchema = new mongoose.Schema({
   _id: {
     type: String,
     default: generateItemId,
@@ -312,13 +313,8 @@ TodoSchema.statics.updateTodo = async function updateTodo(user_id, group_id, ite
   await userGroup.save();
 };
 
-module.exports = {
-  ItemSchema,
-  TabSchema,
-  NoteSchema,
-  TodoSchema,
-  Item: mongoose.model('Item', ItemSchema),
-  Tab: mongoose.model('Tab', TabSchema),
-  Note: mongoose.model('Note', NoteSchema),
-  Todo: mongoose.model('Todo', TodoSchema),
-};
+// 定義並導出模型
+export const Item = mongoose.model('Item', ItemSchema);
+export const Tab = mongoose.model('Tab', TabSchema);
+export const Note = mongoose.model('Note', NoteSchema);
+export const Todo = mongoose.model('Todo', TodoSchema);

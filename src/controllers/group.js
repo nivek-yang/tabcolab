@@ -1,9 +1,7 @@
-const Joi = require('joi');
-const { UserGroup, Group } = require('../models/group');
-
-const { Tab } = require('../models/item');
-
-const errorResponse = require('../utils/errorResponse');
+import Joi from 'joi';
+import { UserGroup, Group } from '../models/group.js';
+import { Tab } from '../models/item.js';
+import errorResponse from '../utils/errorResponse.js';
 
 const getGroups = async (req, res, next) => {
   try {
@@ -164,6 +162,9 @@ const deleteGroup = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  getGroups, createGroup, updateGroup, deleteGroup,
+export {
+  getGroups,
+  createGroup,
+  updateGroup,
+  deleteGroup,
 };
