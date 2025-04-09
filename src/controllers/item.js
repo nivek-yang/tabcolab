@@ -1,5 +1,5 @@
-const { Item } = require('../models/item');
-const errorResponse = require('../utils/errorResponse');
+import { Item } from '../models/item.js';
+import errorResponse from '../utils/errorResponse.js';
 
 const searchItemsInGroups = async (req, res, next) => {
   try {
@@ -62,7 +62,7 @@ const deleteItem = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   moveItem,
   deleteItem,
   searchItemsInGroups,

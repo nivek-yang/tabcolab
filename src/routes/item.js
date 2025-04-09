@@ -1,10 +1,12 @@
-const router = require('express').Router();
-const controller = require('../controllers/item');
-const { validateItemDataTypes } = require('../validations/item');
-const { validateGroupDataTypes } = require('../validations/group');
+import { Router } from 'express';
+import { searchItemsInGroups, moveItem, deleteItem } from '../controllers/item.js';
+import { validateItemDataTypes } from '../validations/item.js';
+import { validateGroupDataTypes } from '../validations/group.js';
 
-router.get('/items/search', controller.searchItemsInGroups);
-router.patch('/:group_id/items/:item_id', validateGroupDataTypes, validateItemDataTypes, controller.moveItem);
-router.delete('/:group_id/items/:item_id', controller.deleteItem);
+const router = Router();
 
-module.exports = router;
+router.get('/items/search', searchItemsInGroups);
+router.patch('/:group_id/items/:item_id', validateGroupDataTypes, validateItemDataTypes, moveItem);
+router.delete('/:group_id/items/:item_id', deleteItem);
+
+export default router;

@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { generateUserId } = require('../utils/generateId');
-const { UserGroup } = require('./group');
-const AppError = require('../utils/appError');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { generateUserId } from '../utils/generateId.js';
+import { UserGroup } from './group.js';
+import AppError from '../utils/appError.js';
 
 const userSchema = new mongoose.Schema({
   _id: {
@@ -173,4 +173,4 @@ userSchema.pre('save', async function saveUser(next) {
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export { User as default };

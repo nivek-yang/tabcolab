@@ -3,4 +3,4 @@ const errorResponse = (res, statusCode, message) => {
   res.status(statusCode).json({ status, message });
 };
 
-module.exports = errorResponse;
+export default errorResponse;

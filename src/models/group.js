@@ -1,8 +1,6 @@
-const mongoose = require('mongoose');
-
-const { generateGroupId } = require('../utils/generateId');
-
-const AppError = require('../utils/appError');
+import mongoose from 'mongoose';
+import { generateGroupId } from '../utils/generateId.js';
+import AppError from '../utils/appError.js';
 
 const { Schema } = mongoose;
 
@@ -217,4 +215,5 @@ UserGroupSchema.statics.deleteGroup = async function deleteGroup(user_id, group_
 
 const Group = mongoose.model('Group', GroupSchema);
 const UserGroup = mongoose.model('UserGroup', UserGroupSchema);
-module.exports = { Group, UserGroup };
+
+export { Group, UserGroup };

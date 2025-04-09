@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 const {
   API_VERSION, PORT, MONGODB_URI_LOCAL, MONGODB_URI_CLOUD, USE_CLOUD_DB, SESSION_SECRET, WHITE_LIST,
@@ -19,7 +19,7 @@ const corsOptions = {
   credentials: true, // 允許跨來源的 cookie
 };
 
-module.exports = {
+export {
   API_VERSION,
   PORT,
   MONGODB_URI,

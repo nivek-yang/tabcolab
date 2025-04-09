@@ -1,4 +1,4 @@
-const passport = require('../../config/passport');
+import passport from '../../config/passport.js';
 
 const authenticateJwt = (req, res, next) => {
   const token = req.headers.authorization;
@@ -29,4 +29,4 @@ const authenticateAdmin = (req, res, next) => {
   next();
 };
 
-module.exports = { authenticateJwt, authenticateAdmin };
+export { authenticateJwt, authenticateAdmin };

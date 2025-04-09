@@ -1,5 +1,5 @@
-const { Tab, Note, Todo } = require('../models/item');
-const errorResponse = require('../utils/errorResponse');
+import { Tab, Note, Todo } from '../models/item.js';
+import errorResponse from '../utils/errorResponse.js';
 
 const addTab = async (req, res, next) => {
   try {
@@ -183,6 +183,10 @@ const updateTodo = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  addTab, updateTab, addNote, updateNote, updateTodo,
+export {
+  addTab,
+  updateTab,
+  addNote,
+  updateNote,
+  updateTodo,
 };

@@ -1,6 +1,8 @@
-const router = require('express').Router();
-const controller = require('../controllers/oauth');
+import { Router } from 'express';
+import { googleOauth } from '../controllers/oauth.js';
 
-router.post('/google/token', controller.googleOauth);
+const router = Router();
 
-module.exports = router;
+router.post('/google/token', googleOauth);
+
+export default router;

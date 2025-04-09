@@ -1,5 +1,5 @@
-const Joi = require('joi');
-const AppError = require('../utils/appError');
+import Joi from 'joi';
+import AppError from '../utils/appError.js';
 
 const itemSchema = Joi.object({
   item_id: Joi.string().optional(),
@@ -28,4 +28,4 @@ const validateItemDataTypes = (req, res, next) => {
   next();
 };
 
-module.exports = { itemSchema, validateItemDataTypes };
+export { itemSchema, validateItemDataTypes };

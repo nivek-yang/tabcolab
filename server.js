@@ -1,31 +1,29 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./swagger/config/swaggerSpecSetup');
-const debug = require('debug')('myapp:server');
-const morgan = require('morgan');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swagger/config/swaggerSpecSetup.js';
+import debug from 'debug';
+import morgan from 'morgan';
 
 // config
-const {
-  API_VERSION, PORT, SESSION_SECRET, corsOptions,
-} = require('./config/config');
+import { API_VERSION, PORT, SESSION_SECRET, corsOptions } from './config/config.js';
 // db connection
-require('./config/dbConnect');
+import './config/dbConnect.js';
 
 const server = express();
 
 // routes
-const userRoutes = require('./src/routes/user');
-const groupRoutes = require('./src/routes/group');
-const itemRoutes = require('./src/routes/item');
-const specItemRoutes = require('./src/routes/specItem');
-const oauthRoutes = require('./src/routes/oauth');
+import userRoutes from './src/routes/user.js';
+import groupRoutes from './src/routes/group.js';
+import itemRoutes from './src/routes/item.js';
+import specItemRoutes from './src/routes/specItem.js';
+import oauthRoutes from './src/routes/oauth.js';
 
 // middlewares
-const { authenticateJwt } = require('./src/middlewares/authenticate');
-const pageNotFoundHandler = require('./src/middlewares/pageNotFoundHandler');
-const apiErrorHandler = require('./src/middlewares/apiErrorHandler');
+import { authenticateJwt } from './src/middlewares/authenticate.js';
+import pageNotFoundHandler from './src/middlewares/pageNotFoundHandler.js';
+import apiErrorHandler from './src/middlewares/apiErrorHandler.js';
 
 server.get('/', (req, res) => {
   res.redirect('/api-doc');
@@ -57,4 +55,4 @@ server.listen(PORT, () => {
   console.log('Server is running');
 });
 
-module.exports = server;
+export default server;

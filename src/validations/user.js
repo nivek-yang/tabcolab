@@ -1,5 +1,5 @@
-const Joi = require('joi');
-const AppError = require('../utils/appError');
+import Joi from 'joi';
+import AppError from '../utils/appError.js';
 
 const registerSchema = Joi.object({
   email: Joi.string().min(6).max(50).required()
@@ -31,4 +31,5 @@ const validateUserInfoUpdateDataTypes = (req, res, next) => {
 
   next();
 };
-module.exports = { validateRegisterandLoginDataTypes, validateUserInfoUpdateDataTypes };
+
+export { validateRegisterandLoginDataTypes, validateUserInfoUpdateDataTypes };
